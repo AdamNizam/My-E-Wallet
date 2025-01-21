@@ -1,5 +1,7 @@
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
+import 'package:bank_sha/ui/widgets/forms.dart';
+import 'package:bank_sha/ui/widgets/logos.dart';
 import 'package:flutter/material.dart';
 
 class SignInPages extends StatelessWidget {
@@ -14,16 +16,7 @@ class SignInPages extends StatelessWidget {
           horizontal: 24,
         ),
         children: [
-          Container(
-            width: 155,
-            height: 50,
-            margin: EdgeInsets.only(top: 100, bottom: 50),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/img_logo_light.png'),
-              ),
-            ),
-          ),
+          CustomLogo(),
           Text(
             'Sign In & \nGrow Your Finance',
             style: blackTextStyle.copyWith(fontSize: 20, fontWeight: semiBold),
@@ -41,52 +34,13 @@ class SignInPages extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // NOTE : EMAIL INPUT
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Email Address',
-                      style: blackTextStyle.copyWith(
-                          fontWeight: medium, fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          contentPadding: const EdgeInsets.all(12)),
-                    ),
-                  ],
-                ),
-
+                CustomFormField(title: 'Email Address'),
                 SizedBox(
                   height: 16,
                 ),
-
-                // NOTE : PASSWORD INPUT
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Password',
-                      style: blackTextStyle.copyWith(
-                          fontWeight: medium, fontSize: 14),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          contentPadding: const EdgeInsets.all(12)),
-                    ),
-                  ],
+                CustomFormField(
+                  title: 'Password',
+                  obscureText: true,
                 ),
                 SizedBox(
                   height: 8,
