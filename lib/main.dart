@@ -1,5 +1,8 @@
 import 'package:bank_sha/ui/pages/onboarding_page.dart';
-import 'package:bank_sha/ui/pages/sign_in_pages.dart';
+import 'package:bank_sha/ui/pages/sign_in_page.dart';
+import 'package:bank_sha/ui/pages/sign_up_page.dart';
+import 'package:bank_sha/ui/pages/sign_up_set_id_card_page.dart';
+import 'package:bank_sha/ui/pages/sign_up_set_profile_page.dart';
 import 'package:bank_sha/ui/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +18,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashPage(),
         '/onboarding': (context) => const OnboardingPage(),
-        '/sign-in': (context) => const SignInPages(),
+        '/sign-in': (context) => const SignInPage(),
+        '/sign-up': (context) => const SignUpPage(),
+        '/sign-up-set-profile': (context) => const SignUpSetProfilePage(),
+        '/sign-up-set-id_card': (context) => const SignUpSetIdCardPage(),
       },
     );
   }

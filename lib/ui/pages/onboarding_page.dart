@@ -1,5 +1,4 @@
 import 'package:bank_sha/shared/theme.dart';
-import 'package:bank_sha/ui/pages/sign_in_pages.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -98,26 +97,11 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             SizedBox(
                               height: 20,
                             ),
-                            SizedBox(
-                              width: 150,
-                              height: 24,
-                              child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const SignInPages(),
-                                    ),
-                                  );
-                                },
-                                style: TextButton.styleFrom(
-                                    padding: EdgeInsets.zero),
-                                child: Text(
-                                  'Sign In',
-                                  style: grayTextStyle.copyWith(
-                                      fontSize: 16, fontWeight: regular),
-                                ),
-                              ),
+                            CustomTextButton(
+                              title: 'Sign In',
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/sign-in');
+                              },
                             ),
                           ],
                         )

@@ -4,8 +4,8 @@ import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:bank_sha/ui/widgets/logos.dart';
 import 'package:flutter/material.dart';
 
-class SignInPages extends StatelessWidget {
-  const SignInPages({super.key});
+class SignInPage extends StatelessWidget {
+  const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +17,8 @@ class SignInPages extends StatelessWidget {
         ),
         children: [
           CustomLogo(),
-          Text(
-            'Sign In & \nGrow Your Finance',
-            style: blackTextStyle.copyWith(fontSize: 20, fontWeight: semiBold),
+          CustomTextTitle(
+            title: 'Sign In & \nGrow Your Finance',
           ),
           SizedBox(
             height: 30,
@@ -67,7 +66,9 @@ class SignInPages extends StatelessWidget {
           ),
           CustomTextButton(
             title: 'Create New Account',
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/sign-up');
+            },
           )
         ],
       ),
