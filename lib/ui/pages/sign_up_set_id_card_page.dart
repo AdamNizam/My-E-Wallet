@@ -80,7 +80,9 @@ class SignUpSetIdCardPage extends StatelessWidget {
           ),
           CustomTextButton(
             title: 'Skip For Now',
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/sign-up-success');
+            },
           )
         ],
       ),

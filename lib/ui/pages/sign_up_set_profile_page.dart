@@ -69,14 +69,17 @@ class SignUpSetProfilePage extends StatelessWidget {
                 SizedBox(
                   height: 30,
                 ),
-                CustomFormField(title: 'Set PIN (6 digit number)'),
+                CustomFormField(
+                  title: 'Set PIN (6 digit number)',
+                  obscureText: true,
+                ),
                 SizedBox(
                   height: 30,
                 ),
                 CustomFilledButton(
                   title: 'Continue',
                   onPressed: () {
-                    Navigator.pushNamed(context, '/sign-up-set-id_card');
+                    Navigator.pushNamed(context, '/sign-up-set-id-card');
                   },
                 )
               ],
