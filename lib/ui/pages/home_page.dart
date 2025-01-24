@@ -1,4 +1,5 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/widgets/home_latest_transaction_item.dart';
 import 'package:bank_sha/ui/widgets/home_serive_item.dart';
 import 'package:flutter/material.dart';
 
@@ -82,6 +83,8 @@ class HomePage extends StatelessWidget {
           walletCard(),
           buildLevel(),
           buildServices(),
+          buildLatestTransaction(),
+          buildSendAgain(),
         ],
       ),
     );
@@ -299,6 +302,89 @@ class HomePage extends StatelessWidget {
               ),
             ],
           )
+        ],
+      ),
+    );
+  }
+
+  Widget buildLatestTransaction() {
+    return Container(
+      margin: const EdgeInsets.only(
+        top: 20,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Latest Transaction',
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.all(22),
+            margin: const EdgeInsets.only(top: 14),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: whiteColor,
+            ),
+            child: Column(
+              children: const [
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat1.png',
+                  title: 'Top Up',
+                  time: 'Yasterday',
+                  value: '+ 240.000',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat2.png',
+                  title: 'Cashback',
+                  time: 'Sept 11, 2023',
+                  value: '+ 240.000',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat3.png',
+                  title: 'Withdraw',
+                  time: 'August 02, 2024',
+                  value: '- 10.000',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat4.png',
+                  title: 'Transfer',
+                  time: 'June 1, 2020',
+                  value: '- 200.00',
+                ),
+                HomeLatestTransactionItem(
+                  iconUrl: 'assets/ic_transaction_cat5.png',
+                  title: 'Electric',
+                  time: 'February 17, 2025',
+                  value: '- 200.000',
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget buildSendAgain() {
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Send Again',
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+          ),
+          SizedBox(
+            height: 14,
+          ),
         ],
       ),
     );
