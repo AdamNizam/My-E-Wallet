@@ -1,6 +1,7 @@
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/home_latest_transaction_item.dart';
-import 'package:bank_sha/ui/widgets/home_serive_item.dart';
+import 'package:bank_sha/ui/widgets/home_service_item.dart';
+import 'package:bank_sha/ui/widgets/home_user_item.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -280,22 +281,22 @@ class HomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              HomeSeriveItem(
+              HomeServiceItem(
                 iconUrl: 'assets/ic_top_up.png',
                 title: 'Top Up',
                 onTap: () {},
               ),
-              HomeSeriveItem(
+              HomeServiceItem(
                 iconUrl: 'assets/ic_send.png',
                 title: 'Send To',
                 onTap: () {},
               ),
-              HomeSeriveItem(
+              HomeServiceItem(
                 iconUrl: 'assets/ic_withdraw.png',
                 title: 'Withdraw',
                 onTap: () {},
               ),
-              HomeSeriveItem(
+              HomeServiceItem(
                 iconUrl: 'assets/ic_more.png',
                 title: 'More',
                 onTap: () {},
@@ -384,6 +385,29 @@ class HomePage extends StatelessWidget {
           ),
           SizedBox(
             height: 14,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: const [
+                HomeUserItem(
+                  imgurl: 'assets/img_friend1.png',
+                  username: 'Bella',
+                ),
+                HomeUserItem(
+                  imgurl: 'assets/img_friend2.png',
+                  username: 'Jennie',
+                ),
+                HomeUserItem(
+                  imgurl: 'assets/img_friend3.png',
+                  username: 'smith',
+                ),
+                HomeUserItem(
+                  imgurl: 'assets/img_friend4.png',
+                  username: 'Alonso',
+                ),
+              ],
+            ),
           ),
         ],
       ),

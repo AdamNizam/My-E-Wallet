@@ -1,11 +1,11 @@
 import 'package:bank_sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
-class HomeSeriveItem extends StatelessWidget {
+class HomeServiceItem extends StatelessWidget {
   final String iconUrl;
   final String title;
   final VoidCallback? onTap;
-  const HomeSeriveItem({
+  const HomeServiceItem({
     super.key,
     required this.iconUrl,
     required this.title,
