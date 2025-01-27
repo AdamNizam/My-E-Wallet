@@ -9,7 +9,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightBackgroundColor,
       appBar: AppBar(
         title: Text(
           'My Profile',
@@ -117,11 +116,15 @@ class ProfilePage extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
           CustomTextButton(
             title: 'Report A Problem',
-          )
+            onPressed: () {},
+          ),
+          const SizedBox(
+            height: 50,
+          ),
         ],
       ),
     );

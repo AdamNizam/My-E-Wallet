@@ -9,7 +9,6 @@ class SignUpSetIdCardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightBackgroundColor,
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: 24,
@@ -70,7 +69,9 @@ class SignUpSetIdCardPage extends StatelessWidget {
                 ),
                 CustomFilledButton(
                   title: 'Continue',
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/sign-up-success');
+                  },
                 )
               ],
             ),
@@ -81,7 +82,7 @@ class SignUpSetIdCardPage extends StatelessWidget {
           CustomTextButton(
             title: 'Skip For Now',
             onPressed: () {
-              Navigator.pushNamed(context, '/sign-up-success');
+              Navigator.pushNamed(context, '/sign-in');
             },
           )
         ],
