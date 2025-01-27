@@ -1,6 +1,7 @@
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/home_latest_transaction_item.dart';
 import 'package:bank_sha/ui/widgets/home_service_item.dart';
+import 'package:bank_sha/ui/widgets/home_tips_item.dart';
 import 'package:bank_sha/ui/widgets/home_user_item.dart';
 import 'package:flutter/material.dart';
 
@@ -86,6 +87,7 @@ class HomePage extends StatelessWidget {
           buildServices(),
           buildLatestTransaction(),
           buildSendAgain(),
+          buildFriendlyTips(),
         ],
       ),
     );
@@ -408,6 +410,55 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget buildFriendlyTips() {
+    return Container(
+      margin: const EdgeInsets.only(top: 20, bottom: 50),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Tips For You',
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+          ),
+          SizedBox(
+            height: 14,
+          ),
+          Wrap(
+            runSpacing: 12,
+            spacing: 12,
+            alignment: WrapAlignment.center,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            children: const [
+              HomeTipsItem(
+                imgUrl: 'assets/img_tips1.png',
+                title: 'How to use A Greate',
+                url: 'https://www.google.com/',
+              ),
+              HomeTipsItem(
+                imgUrl: 'assets/img_tips2.png',
+                title: 'How to use A Greate',
+                url: 'https://github.com/AdamNizam/My-E-Wallet',
+              ),
+              HomeTipsItem(
+                imgUrl: 'assets/img_tips3.png',
+                title: 'How to use A Greate How to use A Greate',
+                url: 'https://github.com/AdamNizam/My-E-Wallet',
+              ),
+              HomeTipsItem(
+                imgUrl: 'assets/img_tips4.png',
+                title: 'How to use A Greate',
+                url: 'https://github.com/AdamNizam/My-E-Wallet',
+              ),
+            ],
           ),
         ],
       ),
