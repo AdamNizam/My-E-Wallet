@@ -81,7 +81,7 @@ class HomePage extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          buildProfile(),
+          buildProfile(context),
           walletCard(),
           buildLevel(),
           buildServices(),
@@ -95,7 +95,7 @@ class HomePage extends StatelessWidget {
 
   // Widgnet
 
-  Widget buildProfile() {
+  Widget buildProfile(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
         top: 30,
@@ -125,29 +125,34 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              image: DecorationImage(
-                image: AssetImage('assets/img_profile.png'),
-              ),
-            ),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Container(
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: whiteColor,
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, '/profile');
+            },
+            child: Container(
+              width: 50,
+              height: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  image: AssetImage('assets/img_profile.png'),
                 ),
-                child: Center(
-                  child: Icon(
-                    Icons.check_circle,
-                    color: greenColor,
-                    size: 16,
+              ),
+              child: Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: whiteColor,
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.check_circle,
+                      color: greenColor,
+                      size: 16,
+                    ),
                   ),
                 ),
               ),
@@ -157,8 +162,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
-  // Wallet Card
 
   Widget walletCard() {
     return Container(
@@ -216,7 +219,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-// Build Level
   Widget buildLevel() {
     return Container(
       margin: const EdgeInsets.only(top: 20),
@@ -264,8 +266,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
-// build service
 
   Widget buildServices() {
     return Container(
@@ -446,7 +446,7 @@ class HomePage extends StatelessWidget {
               HomeTipsItem(
                 imgUrl: 'assets/img_tips2.png',
                 title: 'How to use A Greate',
-                url: 'https://github.com/AdamNizam/My-E-Wallet',
+                url: 'ngasal',
               ),
               HomeTipsItem(
                 imgUrl: 'assets/img_tips3.png',
