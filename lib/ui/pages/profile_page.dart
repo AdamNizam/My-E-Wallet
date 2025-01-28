@@ -10,17 +10,9 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'My Profile',
-          style: blackTextStyle.copyWith(
-            fontSize: 20,
-            fontWeight: semiBold,
-          ),
         ),
-        centerTitle: true,
-        backgroundColor: lightBackgroundColor,
-        elevation: 0,
-        iconTheme: IconThemeData(color: blackColor),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -85,17 +77,23 @@ class ProfilePage extends StatelessWidget {
                 ProfileMenuItem(
                   iconUrl: 'assets/ic_edit_profile.png',
                   title: 'Edit Profile',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/pin');
+                  },
                 ),
                 ProfileMenuItem(
                   iconUrl: 'assets/ic_my_pin.png',
                   title: 'My Pin',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/pin');
+                  },
                 ),
                 ProfileMenuItem(
                   iconUrl: 'assets/ic_wallet_settings.png',
                   title: 'Wallet Settings',
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, '/pin');
+                  },
                 ),
                 ProfileMenuItem(
                   iconUrl: 'assets/ic_reward.png',
