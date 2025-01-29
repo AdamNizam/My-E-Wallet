@@ -24,7 +24,7 @@ class CustomLogo extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      margin: EdgeInsets.only(top: 100, bottom: 50),
+      margin: EdgeInsets.only(top: 80, bottom: 30),
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/img_logo_light.png'),

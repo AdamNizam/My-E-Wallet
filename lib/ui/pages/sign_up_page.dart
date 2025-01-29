@@ -20,7 +20,7 @@ class SignUpPage extends StatelessWidget {
             title: 'Join Us to Unlock\nYour Growth',
           ),
           SizedBox(
-            height: 30,
+            height: 10,
           ),
           Container(
             padding: const EdgeInsets.all(22),
@@ -62,7 +62,7 @@ class SignUpPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 4,
+            height: 15,
           ),
           CustomTextButton(
             title: 'Sign In',
