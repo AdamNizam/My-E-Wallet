@@ -1,26 +1,22 @@
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
-import 'package:bank_sha/ui/widgets/logos.dart';
 import 'package:flutter/material.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+class ProfileEditPage extends StatelessWidget {
+  const ProfileEditPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Edit Profile'),
+      ),
       body: ListView(
-        padding: EdgeInsets.symmetric(
-          horizontal: 24,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 24),
         children: [
-          CustomLogo(),
-          CustomTextTitle(
-            title: 'Join Us to Unlock\nYour Growth',
-          ),
           SizedBox(
-            height: 30,
+            height: 40,
           ),
           Container(
             padding: const EdgeInsets.all(22),
@@ -32,44 +28,32 @@ class SignUpPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // NOTE : USERNAME INPUT
+                CustomFormField(title: 'Username'),
+                SizedBox(
+                  height: 16,
+                ),
                 CustomFormField(title: 'Full Name'),
                 SizedBox(
                   height: 16,
                 ),
-                // NOTE : EMAIL INPUT
                 CustomFormField(title: 'Email Address'),
                 SizedBox(
                   height: 16,
                 ),
-                // NOTE : PASSWORD INPUT
                 CustomFormField(
                   title: 'Password',
                   obscureText: true,
                 ),
                 SizedBox(
-                  height: 8,
-                ),
-                SizedBox(
-                  height: 20,
+                  height: 28,
                 ),
                 CustomFilledButton(
-                  title: 'Continue',
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/sign-up-set-profile');
-                  },
+                  title: 'Update Now',
+                  onPressed: () {},
                 )
               ],
             ),
           ),
-          SizedBox(
-            height: 4,
-          ),
-          CustomTextButton(
-            title: 'Sign In',
-            onPressed: () {
-              Navigator.pushNamed(context, '/sign-in');
-            },
-          )
         ],
       ),
     );

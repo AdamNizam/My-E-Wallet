@@ -17,6 +17,9 @@ class _PinPageState extends State<PinPage> {
         pinController.text = pinController.text + number;
       });
     }
+    if (pinController.text == '258011') {
+      Navigator.pop(context, true);
+    }
   }
 
   deletePin() {
@@ -49,20 +52,21 @@ class _PinPageState extends State<PinPage> {
                 height: 50,
               ),
               SizedBox(
-                width: 200,
+                width: 150,
                 child: TextFormField(
                   controller: pinController,
                   obscureText: true,
                   cursorColor: blueColor,
                   obscuringCharacter: '*',
                   enabled: false,
+                  textAlign: TextAlign.center,
                   style: whiteTextStyle.copyWith(
-                    fontSize: 25,
+                    fontSize: 28,
                     fontWeight: medium,
                     letterSpacing: 10,
                   ),
                   decoration: InputDecoration(
-                    enabledBorder: UnderlineInputBorder(
+                    disabledBorder: UnderlineInputBorder(
                       borderSide: BorderSide(color: grayColor),
                     ),
                     focusedBorder: UnderlineInputBorder(
@@ -138,7 +142,9 @@ class _PinPageState extends State<PinPage> {
                   ),
                   CustomInputButton(
                     tittle: '0',
-                    onTap: () {},
+                    onTap: () {
+                      addPin('0');
+                    },
                   ),
                   GestureDetector(
                     onTap: () {
