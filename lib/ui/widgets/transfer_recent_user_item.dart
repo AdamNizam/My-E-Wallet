@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class TransferRecentUserItem extends StatelessWidget {
   final String imgUrl;
   final String name;
-  final String userName;
+  final String username;
   final bool isVerified;
   const TransferRecentUserItem({
     super.key,
     required this.imgUrl,
     required this.name,
-    required this.userName,
+    required this.username,
     this.isVerified = false,
   });
 
@@ -28,7 +28,62 @@ class TransferRecentUserItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
-        children: [],
+        children: [
+          Container(
+            width: 45,
+            height: 45,
+            margin: const EdgeInsets.only(right: 14),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: AssetImage(imgUrl),
+              ),
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                name,
+                style: blackTextStyle.copyWith(
+                  fontSize: 16,
+                  fontWeight: medium,
+                ),
+              ),
+              const SizedBox(
+                height: 2,
+              ),
+              Text(
+                '@$username',
+                style: grayTextStyle.copyWith(
+                  fontSize: 12,
+                  fontWeight: regular,
+                ),
+              ),
+            ],
+          ),
+          Spacer(),
+          if (isVerified)
+            Row(
+              children: [
+                Icon(
+                  Icons.check_circle,
+                  size: 15,
+                  color: greenColor,
+                ),
+                const SizedBox(
+                  width: 3,
+                ),
+                Text(
+                  'Verified',
+                  style: greenTextStyle.copyWith(
+                    fontWeight: medium,
+                    fontSize: 11,
+                  ),
+                )
+              ],
+            ),
+        ],
       ),
     );
   }

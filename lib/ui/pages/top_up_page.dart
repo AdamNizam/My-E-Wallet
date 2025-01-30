@@ -96,26 +96,20 @@ class TopUpPage extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          CustomFilledButton(
-            title: 'Continue',
-            onPressed: () {
-              Navigator.pushNamed(context, '/topup-amount');
-            },
-          ),
           const SizedBox(
-            height: 50,
+            height: 10,
           ),
         ],
       ),
-      // bottomNavigationBar: Padding(
-      //   padding: const EdgeInsets.all(16.0),
-      //   child: CustomFilledButton(
-      //     title: 'Continue',
-      //     onPressed: () {
-      //       Navigator.pushNamed(context, '/topup-amount');
-      //     },
-      //   ),
-      // ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: CustomFilledButton(
+          title: 'Continue',
+          onPressed: () {
+            Navigator.pushNamed(context, '/topup-amount');
+          },
+        ),
+      ),
     );
   }
 }

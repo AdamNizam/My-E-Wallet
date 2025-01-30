@@ -64,7 +64,7 @@ class SignInPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 10,
+            height: 20,
           ),
           CustomTextButton(
             title: 'Create New Account',

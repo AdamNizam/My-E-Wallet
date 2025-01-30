@@ -199,7 +199,7 @@ class _TopUpAmountPageState extends State<TopUpAmountPage> {
             ],
           ),
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           CustomFilledButton(
             title: 'Checkout Now',
