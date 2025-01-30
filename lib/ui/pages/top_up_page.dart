@@ -94,7 +94,7 @@ class TopUpPage extends StatelessWidget {
             imgUrl: 'assets/img_bank_ocbc.png',
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           CustomFilledButton(
             title: 'Continue',
@@ -103,10 +103,19 @@ class TopUpPage extends StatelessWidget {
             },
           ),
           const SizedBox(
-            height: 200,
+            height: 50,
           ),
         ],
       ),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.all(16.0),
+      //   child: CustomFilledButton(
+      //     title: 'Continue',
+      //     onPressed: () {
+      //       Navigator.pushNamed(context, '/topup-amount');
+      //     },
+      //   ),
+      // ),
     );
   }
 }
