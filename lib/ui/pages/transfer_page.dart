@@ -43,10 +43,12 @@ class TransferPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
         child: CustomFilledButton(
           title: 'Continue',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/transfer-amount');
+          },
         ),
       ),
     );
