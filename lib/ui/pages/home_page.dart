@@ -190,7 +190,7 @@ class HomePage extends StatelessWidget {
             height: 15,
           ),
           Text(
-            '**** **** **** 1280',
+            '**** **** 1280',
             style: whiteTextStyle.copyWith(
               fontSize: 20,
               fontWeight: extraBold,
