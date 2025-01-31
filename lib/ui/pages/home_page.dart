@@ -1,4 +1,5 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/more_dialog.dart';
 import 'package:bank_sha/ui/widgets/home_latest_transaction_item.dart';
 import 'package:bank_sha/ui/widgets/home_service_item.dart';
 import 'package:bank_sha/ui/widgets/home_tips_item.dart';
@@ -304,7 +305,12 @@ class HomePage extends StatelessWidget {
               HomeServiceItem(
                 iconUrl: 'assets/ic_more.png',
                 title: 'More',
-                onTap: () {},
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => const MoreDialog(),
+                  );
+                },
               ),
             ],
           )
