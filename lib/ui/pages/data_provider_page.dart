@@ -1,4 +1,5 @@
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/data_provider_item.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,15 @@ class DataProviderPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Beli Data'),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(24),
+        child: CustomFilledButton(
+          title: 'Continue',
+          onPressed: () {
+            Navigator.pushNamed(context, '/data-package');
+          },
+        ),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -73,7 +83,23 @@ class DataProviderPage extends StatelessWidget {
           const SizedBox(
             height: 14,
           ),
-          DataProviderItem(),
+          DataProviderItem(
+            title: 'XL Axiata',
+            imgUrl: 'assets/img_xl.png',
+          ),
+          DataProviderItem(
+            title: 'Indosat Ooredoo',
+            imgUrl: 'assets/img_indosat.png',
+            isSelected: true,
+          ),
+          DataProviderItem(
+            title: 'Telkomsel',
+            imgUrl: 'assets/img_telkomsel.png',
+          ),
+          DataProviderItem(
+            title: 'Singtel Indonesia',
+            imgUrl: 'assets/img_singtel.png',
+          ),
         ],
       ),
     );

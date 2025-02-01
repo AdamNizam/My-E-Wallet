@@ -43,7 +43,7 @@ class TransferPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+        padding: const EdgeInsets.all(24),
         child: CustomFilledButton(
           title: 'Continue',
           onPressed: () {
