@@ -1,3 +1,4 @@
+import 'package:bank_sha/shared/shared_methods.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -45,7 +46,7 @@ class PackageDataItem extends StatelessWidget {
             height: 2,
           ),
           Text(
-            'Rp.$price',
+            formatCurrency(price),
             style: grayTextStyle.copyWith(
               fontWeight: regular,
               fontSize: 14,
