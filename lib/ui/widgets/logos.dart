@@ -17,7 +17,11 @@ class CustomTextTitle extends StatelessWidget {
 class CustomLogo extends StatelessWidget {
   final double width;
   final double height;
-  const CustomLogo({super.key, this.width = 155, this.height = 50});
+  const CustomLogo({
+    super.key,
+    this.width = 150,
+    this.height = 50,
+  });
 
   @override
   Widget build(BuildContext context) {

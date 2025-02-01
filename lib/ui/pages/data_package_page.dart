@@ -26,7 +26,7 @@ class DataPackagePage extends StatelessWidget {
         ),
         children: [
           const SizedBox(
-            height: 20,
+            height: 30,
           ),
           Text(
             'Phone Number',
@@ -36,7 +36,7 @@ class DataPackagePage extends StatelessWidget {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 20,
           ),
           CustomFormField(
             title: '+628',
@@ -56,44 +56,34 @@ class DataPackagePage extends StatelessWidget {
             height: 12,
           ),
           Wrap(
-            spacing: 12,
+            spacing: 18,
             runSpacing: 15,
+            alignment: WrapAlignment.center,
             children: [
               PackageDataItem(
-                imgUrl: 'assets/img_friend2.png',
-                name: 'Bengoh',
-                username: 'Beng0h37',
+                amount: 10,
+                price: 1200,
                 isSelected: true,
               ),
               PackageDataItem(
-                imgUrl: 'assets/img_friend1.png',
-                name: 'Bengoh',
-                username: 'Beng0h37',
-                isSelected: false,
+                amount: 15,
+                price: 2300,
               ),
               PackageDataItem(
-                imgUrl: 'assets/img_friend4.png',
-                name: 'Bengoh',
-                username: 'Beng0h37',
-                isSelected: false,
+                amount: 20,
+                price: 5900,
               ),
               PackageDataItem(
-                imgUrl: 'assets/img_friend3.png',
-                name: 'Bengoh',
-                username: 'Beng0h37',
-                isSelected: false,
+                amount: 40,
+                price: 11000,
               ),
               PackageDataItem(
-                imgUrl: 'assets/img_friend4.png',
-                name: 'Bengoh',
-                username: 'Beng0h37',
-                isSelected: false,
+                amount: 67,
+                price: 23000,
               ),
               PackageDataItem(
-                imgUrl: 'assets/img_friend3.png',
-                name: 'Bengoh',
-                username: 'Beng0h37',
-                isSelected: false,
+                amount: 100,
+                price: 1000000,
               ),
             ],
           ),
