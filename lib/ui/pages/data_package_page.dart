@@ -17,7 +17,12 @@ class DataPackagePage extends StatelessWidget {
         padding: const EdgeInsets.all(24),
         child: CustomFilledButton(
           title: 'Continue',
-          onPressed: () {},
+          onPressed: () async {
+            if (await Navigator.pushNamed(context, '/pin') == true) {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/data-success', (route) => false);
+            }
+          },
         ),
       ),
       body: ListView(
