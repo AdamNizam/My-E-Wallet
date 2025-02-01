@@ -83,7 +83,7 @@ class HomePage extends StatelessWidget {
           ),
           buildProfile(context),
           walletCard(),
-          buildLevel(),
+          buildLevel(context),
           buildServices(context),
           buildLatestTransaction(),
           buildSendAgain(),
@@ -219,50 +219,55 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget buildLevel() {
-    return Container(
-      margin: const EdgeInsets.only(top: 20),
-      padding: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: whiteColor,
-      ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                'Level 1',
-                style: blackTextStyle.copyWith(
-                  fontWeight: medium,
+  Widget buildLevel(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/history-transaction');
+      },
+      child: Container(
+        margin: const EdgeInsets.only(top: 20),
+        padding: const EdgeInsets.all(22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: whiteColor,
+        ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Text(
+                  'Level 1',
+                  style: blackTextStyle.copyWith(
+                    fontWeight: medium,
+                  ),
                 ),
-              ),
-              Spacer(),
-              Text(
-                '55% ',
-                style:
-                    greenTextStyle.copyWith(fontWeight: semiBold, fontSize: 14),
-              ),
-              Text(
-                'of Rp. 370.000',
-                style:
-                    blackTextStyle.copyWith(fontWeight: medium, fontSize: 14),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(55),
-            child: LinearProgressIndicator(
-              value: 0.55,
-              minHeight: 8,
-              valueColor: AlwaysStoppedAnimation(greenColor),
-              backgroundColor: lightBackgroundColor,
+                Spacer(),
+                Text(
+                  '55% ',
+                  style: greenTextStyle.copyWith(
+                      fontWeight: semiBold, fontSize: 14),
+                ),
+                Text(
+                  'of Rp. 370.000',
+                  style:
+                      blackTextStyle.copyWith(fontWeight: medium, fontSize: 14),
+                ),
+              ],
             ),
-          ),
-        ],
+            SizedBox(
+              height: 10,
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(55),
+              child: LinearProgressIndicator(
+                value: 0.55,
+                minHeight: 8,
+                valueColor: AlwaysStoppedAnimation(greenColor),
+                backgroundColor: lightBackgroundColor,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
