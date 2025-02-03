@@ -1,3 +1,4 @@
+import 'package:bank_sha/models/sign_up_form_model.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
@@ -5,7 +6,11 @@ import 'package:bank_sha/ui/widgets/logos.dart';
 import 'package:flutter/material.dart';
 
 class SignUpSetProfilePage extends StatelessWidget {
-  const SignUpSetProfilePage({super.key});
+  final SignUpFormModel data;
+  const SignUpSetProfilePage({
+    super.key,
+    required this.data,
+  });
 
   @override
   Widget build(BuildContext context) {
