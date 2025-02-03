@@ -81,7 +81,11 @@ class _SignUpPageState extends State<SignUpPage> {
                 CustomFilledButton(
                   title: 'Continue',
                   onPressed: () {
-                    Navigator.pushNamed(context, '/sign-up-set-profile');
+                    if (validate()) {
+                      Navigator.pushNamed(context, '/sign-up-set-profile');
+                    } else {
+                      showCustomSnackbar(context, 'All fields must be filled');
+                    }
                   },
                 )
               ],
@@ -93,11 +97,7 @@ class _SignUpPageState extends State<SignUpPage> {
           CustomTextButton(
             title: 'Sign In',
             onPressed: () {
-              if (validate()) {
-                Navigator.pushNamed(context, '/sign-in');
-              } else {
-                showCustomSnackbar(context, 'All fields must be filled');
-              }
+              Navigator.pushNamed(context, '/sign-in');
             },
           )
         ],

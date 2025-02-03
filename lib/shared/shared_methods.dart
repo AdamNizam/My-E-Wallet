@@ -8,7 +8,6 @@ void showCustomSnackbar(BuildContext context, String message) {
     messageText: Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(Icons.warning, color: whiteColor),
         const SizedBox(width: 8),
         Text(
           message,
