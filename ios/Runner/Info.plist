@@ -50,5 +50,9 @@
 	<string>https</string>
 	<string>http</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>this app requires access to the photo library</string>
+	<key>NSCameraUsageDescription</key>
+	<key>NSMicrophoneUsageDescription</key>
 </dict>
 </plist>
