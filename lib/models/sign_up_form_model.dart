@@ -37,6 +37,6 @@ class SignUpFormModel {
         password: password,
         pin: pin ?? this.pin,
         profilePicture: profilePicture ?? this.profilePicture,
-        ktp: ktp ?? this.ktp,
+        ktp: ktp,
       );
 }
