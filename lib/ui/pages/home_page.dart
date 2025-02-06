@@ -181,7 +181,7 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Syahnan Achmad',
+            'Syahnan \asjopsspo',
             style: whiteTextStyle.copyWith(
               fontSize: 18,
               fontWeight: medium,
