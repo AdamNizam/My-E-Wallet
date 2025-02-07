@@ -1,7 +1,9 @@
+import 'package:bank_sha/blocs/auth/auth_bloc.dart';
 import 'package:bank_sha/shared/shared_methods.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PinPage extends StatefulWidget {
   const PinPage({super.key});
@@ -12,16 +14,33 @@ class PinPage extends StatefulWidget {
 
 class _PinPageState extends State<PinPage> {
   final TextEditingController pinController = TextEditingController(text: '');
+  String pin = '';
+  bool isError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final authState = context.read<AuthBloc>().state;
+    if (authState is AuthSuccess) {
+      pin = authState.user.pin!;
+    }
+  }
+
   addPin(String number) {
     if (pinController.text.length < 6) {
       setState(() {
+        isError = false;
+
         pinController.text = pinController.text + number;
       });
     }
     if (pinController.text.length == 6) {
-      if (pinController.text == '258011') {
+      if (pinController.text == pin) {
         Navigator.pop(context, true);
       } else {
+        setState(() {
+          isError = true;
+        });
         showCustomSnackbar(context, 'Your PIN is failed, Please try again!');
       }
     }
@@ -30,6 +49,8 @@ class _PinPageState extends State<PinPage> {
   deletePin() {
     if (pinController.text.isNotEmpty) {
       setState(() {
+        isError = false;
+
         pinController.text =
             pinController.text.substring(0, pinController.text.length - 1);
       });
@@ -69,6 +90,7 @@ class _PinPageState extends State<PinPage> {
                     fontSize: 28,
                     fontWeight: medium,
                     letterSpacing: 10,
+                    color: isError ? redColor : whiteColor,
                   ),
                   decoration: InputDecoration(
                     disabledBorder: UnderlineInputBorder(
