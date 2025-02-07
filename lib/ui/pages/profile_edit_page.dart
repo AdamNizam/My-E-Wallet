@@ -56,7 +56,9 @@ class _ProfileEditPageState extends State<ProfileEditPage> {
         builder: (context, state) {
           if (state is AuthLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: blueColor,
+              ),
             );
           }
           return ListView(

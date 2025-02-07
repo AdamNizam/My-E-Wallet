@@ -30,7 +30,15 @@ class ProfilePage extends StatelessWidget {
         builder: (context, state) {
           if (state is AuthLoading) {
             return Center(
-              child: CircularProgressIndicator(),
+              child: SizedBox(
+                width: 80,
+                height: 80,
+                child: CircularProgressIndicator(
+                  strokeWidth: 6.0,
+                  backgroundColor: Colors.grey[300],
+                  valueColor: AlwaysStoppedAnimation<Color>(blueColor),
+                ),
+              ),
             );
           }
           return ListView(
