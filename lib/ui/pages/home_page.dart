@@ -1,3 +1,4 @@
+import 'package:bank_sha/blocs/auth/auth_bloc.dart';
 import 'package:bank_sha/shared/shared_methods.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/pages/more_dialog.dart';
@@ -6,6 +7,7 @@ import 'package:bank_sha/ui/widgets/home_service_item.dart';
 import 'package:bank_sha/ui/widgets/home_tips_item.dart';
 import 'package:bank_sha/ui/widgets/home_user_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -97,126 +99,146 @@ class HomePage extends StatelessWidget {
   // Widgnet
 
   Widget buildProfile(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: 30,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Hello,',
-                style: grayTextStyle.copyWith(
-                  fontWeight: regular,
-                  fontSize: 16,
-                ),
-              ),
-              SizedBox(
-                height: 2,
-              ),
-              Text(
-                'Syahnan',
-                style: blackTextStyle.copyWith(
-                  fontWeight: semiBold,
-                  fontSize: 20,
-                ),
-              ),
-            ],
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, '/profile');
-            },
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                image: DecorationImage(
-                  image: AssetImage('assets/img_profile.png'),
-                ),
-              ),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: whiteColor,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.check_circle,
-                      color: greenColor,
-                      size: 16,
-                    ),
-                  ),
-                ),
-              ),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthSuccess) {
+          return Container(
+            margin: const EdgeInsets.only(
+              top: 30,
             ),
-          ),
-        ],
-      ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Hello,',
+                      style: grayTextStyle.copyWith(
+                        fontWeight: regular,
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      state.user.username.toString(),
+                      style: blackTextStyle.copyWith(
+                        fontWeight: semiBold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/profile');
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        image: state.user.profilePicture == null
+                            ? AssetImage('assets/img_profile.png')
+                            : NetworkImage(state.user.profilePicture!)
+                                as ImageProvider,
+                      ),
+                    ),
+                    child: state.user.verified == 1
+                        ? Align(
+                            alignment: Alignment.topRight,
+                            child: Container(
+                              width: 16,
+                              height: 16,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: whiteColor,
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  Icons.check_circle,
+                                  color: greenColor,
+                                  size: 16,
+                                ),
+                              ),
+                            ),
+                          )
+                        : null,
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
 
   Widget walletCard() {
-    return Container(
-      width: double.infinity,
-      height: 200,
-      margin: const EdgeInsets.only(top: 20),
-      padding: const EdgeInsets.all(30),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
-        image: const DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('assets/img_bg_card.png'),
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Syahnan \asjopsspo',
-            style: whiteTextStyle.copyWith(
-              fontSize: 18,
-              fontWeight: medium,
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state is AuthSuccess) {
+          return Container(
+            width: double.infinity,
+            height: 200,
+            margin: const EdgeInsets.only(top: 20),
+            padding: const EdgeInsets.all(30),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(28),
+              image: const DecorationImage(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/img_bg_card.png'),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            '**** **** 1280',
-            style: whiteTextStyle.copyWith(
-              fontSize: 20,
-              fontWeight: extraBold,
-              letterSpacing: 4,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  state.user.name.toString(),
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 18,
+                    fontWeight: medium,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  state.user.cardNumber!.replaceAllMapped(
+                      RegExp(r".{4}"), (match) => "${match.group(0)} "),
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 16,
+                    fontWeight: blackBold,
+                    letterSpacing: 4,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  'Balance :',
+                  style: whiteTextStyle,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  formatCurrency(state.user.balance ?? 0),
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 20,
+                    fontWeight: semiBold,
+                  ),
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Text(
-            'Balance :',
-            style: whiteTextStyle,
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            formatCurrency(12552000),
-            style: whiteTextStyle.copyWith(
-              fontSize: 20,
-              fontWeight: semiBold,
-            ),
-          ),
-        ],
-      ),
+          );
+        }
+        return Container();
+      },
     );
   }
 
@@ -225,50 +247,57 @@ class HomePage extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(context, '/history-transaction');
       },
-      child: Container(
-        margin: const EdgeInsets.only(top: 20),
-        padding: const EdgeInsets.all(22),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: whiteColor,
-        ),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Level 1',
-                  style: blackTextStyle.copyWith(
-                    fontWeight: medium,
-                  ),
-                ),
-                Spacer(),
-                Text(
-                  '55% ',
-                  style: greenTextStyle.copyWith(
-                      fontWeight: semiBold, fontSize: 14),
-                ),
-                Text(
-                  'of ${formatCurrency(7892000)}',
-                  style:
-                      blackTextStyle.copyWith(fontWeight: medium, fontSize: 14),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(55),
-              child: LinearProgressIndicator(
-                value: 0.55,
-                minHeight: 8,
-                valueColor: AlwaysStoppedAnimation(greenColor),
-                backgroundColor: lightBackgroundColor,
+      child: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          if (state is AuthSuccess) {
+            return Container(
+              margin: const EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: whiteColor,
               ),
-            ),
-          ],
-        ),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Level 1',
+                        style: blackTextStyle.copyWith(
+                          fontWeight: medium,
+                        ),
+                      ),
+                      Spacer(),
+                      Text(
+                        '55% ',
+                        style: greenTextStyle.copyWith(
+                            fontWeight: semiBold, fontSize: 14),
+                      ),
+                      Text(
+                        'of ${formatCurrency(state.user.balance ?? 0)}',
+                        style: blackTextStyle.copyWith(
+                            fontWeight: medium, fontSize: 14),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(55),
+                    child: LinearProgressIndicator(
+                      value: 0.55,
+                      minHeight: 8,
+                      valueColor: AlwaysStoppedAnimation(greenColor),
+                      backgroundColor: lightBackgroundColor,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }
+          return Container();
+        },
       ),
     );
   }
