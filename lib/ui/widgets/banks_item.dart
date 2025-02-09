@@ -1,14 +1,13 @@
+import 'package:bank_sha/models/payment_methods_form_model.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class BanksItem extends StatelessWidget {
-  final String title;
-  final String imgUrl;
+  final PaymentMethodsFormModel paymentMethod;
   final bool isSelected;
   const BanksItem({
     super.key,
-    required this.title,
-    required this.imgUrl,
+    required this.paymentMethod,
     this.isSelected = false,
   });
 
@@ -27,15 +26,15 @@ class BanksItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.asset(
-            imgUrl,
+          Image.network(
+            paymentMethod.thumbnail!,
             height: 30,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                title,
+                paymentMethod.name.toString(),
                 style: blackTextStyle.copyWith(
                   fontSize: 16,
                   fontWeight: medium,
@@ -45,7 +44,7 @@ class BanksItem extends StatelessWidget {
                 height: 2,
               ),
               Text(
-                '50 ms',
+                paymentMethod.time.toString(),
                 style: grayTextStyle.copyWith(fontSize: 12),
               ),
             ],

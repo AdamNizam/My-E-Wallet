@@ -1,13 +1,22 @@
 import 'package:bank_sha/blocs/auth/auth_bloc.dart';
+import 'package:bank_sha/blocs/payment_method/payment_method_bloc.dart';
+import 'package:bank_sha/models/payment_methods_form_model.dart';
+import 'package:bank_sha/shared/shared_methods.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/banks_item.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class TopUpPage extends StatelessWidget {
+class TopUpPage extends StatefulWidget {
   const TopUpPage({super.key});
 
+  @override
+  State<TopUpPage> createState() => _TopUpPageState();
+}
+
+class _TopUpPageState extends State<TopUpPage> {
+  PaymentMethodsFormModel? selectedPaymentMethod;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,39 +95,76 @@ class TopUpPage extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          BanksItem(
-            title: 'BANK BCA',
-            imgUrl: 'assets/img_bank_bca.png',
-            isSelected: true,
-          ),
-          BanksItem(
-            title: 'BANK BNI',
-            imgUrl: 'assets/img_bank_bni.png',
-          ),
-          BanksItem(
-            title: 'BANK MANDIRI',
-            imgUrl: 'assets/img_bank_mandiri.png',
-          ),
-          BanksItem(
-            title: 'BANK OCBC',
-            imgUrl: 'assets/img_bank_ocbc.png',
+          BlocProvider(
+            create: (context) => PaymentMethodBloc()..add(PaymentMethodGet()),
+            child: BlocBuilder<PaymentMethodBloc, PaymentMethodState>(
+              builder: (context, state) {
+                if (state is PaymentMethodSuccess) {
+                  return Column(
+                      children: state.paymentMethod.map((paymentMethods) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedPaymentMethod = paymentMethods;
+                        });
+                      },
+                      child: BanksItem(
+                        paymentMethod: paymentMethods,
+                        isSelected:
+                            paymentMethods.id == selectedPaymentMethod?.id,
+                      ),
+                    );
+                  }).toList());
+                }
+                return Center(
+                  child: SizedBox(
+                    width: 40,
+                    height: 40,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 3.0,
+                      backgroundColor: Colors.grey[300],
+                      valueColor: AlwaysStoppedAnimation<Color>(blueColor),
+                    ),
+                  ),
+                );
+              },
+            ),
           ),
           const SizedBox(
             height: 20,
           ),
-          const SizedBox(
-            height: 10,
-          ),
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(24),
-        child: CustomFilledButton(
-          title: 'Continue',
-          onPressed: () {
-            Navigator.pushNamed(context, '/topup-amount');
-          },
-        ),
+        padding: EdgeInsets.all(24),
+        child: selectedPaymentMethod != null
+            ? CustomFilledButton(
+                title: 'Continue',
+                onPressed: () {
+                  Navigator.pushNamed(context, '/topup-amount');
+                },
+              )
+            : SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () {
+                    showCustomSnackbar(
+                        context, "You don't select of Bank yet!");
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: whiteColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(56),
+                    ),
+                  ),
+                  child: Text(
+                    'Select Of Bank',
+                    style: blackTextStyle.copyWith(
+                        fontSize: 16, fontWeight: semiBold),
+                  ),
+                ),
+              ),
       ),
     );
   }

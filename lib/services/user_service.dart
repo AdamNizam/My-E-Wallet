@@ -14,10 +14,10 @@ class UserService {
         Uri.parse(
           '$baseUrl/users',
         ),
-        body: data.toJson(),
         headers: {
           'Authorization': token,
         },
+        body: data.toJson(),
       );
       if (res.statusCode != 200) {
         throw jsonDecode(res.body)['message'];
