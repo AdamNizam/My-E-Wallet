@@ -1,8 +1,8 @@
 class UserEditFormModel {
-  String? username;
-  String? name;
-  String? email;
-  String? password;
+  final String? username;
+  final String? name;
+  final String? email;
+  final String? password;
 
   UserEditFormModel({
     this.name,

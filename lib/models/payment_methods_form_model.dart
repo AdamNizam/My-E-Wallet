@@ -1,9 +1,9 @@
 class PaymentMethodsFormModel {
-  int? id;
-  String? name;
-  String? code;
-  String? thumbnail;
-  String? time;
+  final int? id;
+  final String? name;
+  final String? code;
+  final String? thumbnail;
+  final String? time;
 
   PaymentMethodsFormModel({
     this.id,
