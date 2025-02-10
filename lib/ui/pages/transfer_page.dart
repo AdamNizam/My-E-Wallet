@@ -1,7 +1,9 @@
 import 'package:bank_sha/blocs/user/user_bloc.dart';
+import 'package:bank_sha/models/transfer_form_model.dart';
 import 'package:bank_sha/models/user_model.dart';
 import 'package:bank_sha/shared/shared_methods.dart';
 import 'package:bank_sha/shared/theme.dart';
+import 'package:bank_sha/ui/pages/transfer_amount_page.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:bank_sha/ui/widgets/transfer_recent_user_item.dart';
@@ -81,7 +83,14 @@ class _TransferPageState extends State<TransferPage> {
             ? CustomFilledButton(
                 title: 'Continue',
                 onPressed: () {
-                  Navigator.pushNamed(context, '/transfer-amount');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (route) => TransferAmountPage(
+                        data: TransferFormModel(sendTo: selectedUser!.username),
+                      ),
+                    ),
+                  );
                 },
               )
             : SizedBox(
@@ -93,15 +102,15 @@ class _TransferPageState extends State<TransferPage> {
                         context, "You don't select of user yet!");
                   },
                   style: TextButton.styleFrom(
-                    backgroundColor: whiteColor,
+                    backgroundColor: redColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(56),
                     ),
                   ),
                   child: Text(
                     'Select Of User',
-                    style: blackTextStyle.copyWith(
-                        fontSize: 16, fontWeight: semiBold),
+                    style: whiteTextStyle.copyWith(
+                        fontSize: 16, fontWeight: medium),
                   ),
                 ),
               ),
@@ -132,7 +141,22 @@ class _TransferPageState extends State<TransferPage> {
               if (state is UserSuccess) {
                 return Column(
                   children: state.users.map((user) {
-                    return TransferRecentUserItem(user: user);
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          selectedUser = user;
+                        });
+                      },
+                      onDoubleTap: () {
+                        setState(() {
+                          selectedUser = null;
+                        });
+                      },
+                      child: TransferRecentUserItem(
+                        user: user,
+                        isSelected: user.id == selectedUser?.id,
+                      ),
+                    );
                   }).toList(),
                 );
               }

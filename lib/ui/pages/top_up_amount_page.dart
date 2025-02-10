@@ -88,6 +88,7 @@ class _TopUpAmountPageState extends State<TopUpAmountPage> {
                       ),
                     ),
                   );
+
               Navigator.pushNamedAndRemoveUntil(
                   context, '/topup-success', (route) => false);
             }
