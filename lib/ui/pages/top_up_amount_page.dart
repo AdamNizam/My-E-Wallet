@@ -81,7 +81,13 @@ class _TopUpAmountPageState extends State<TopUpAmountPage> {
               }
 
               if (!context.mounted) return;
-
+              context.read<AuthBloc>().add(
+                    AuthUpdateBalance(
+                      int.parse(
+                        amountController.text.replaceAll('.', ''),
+                      ),
+                    ),
+                  );
               Navigator.pushNamedAndRemoveUntil(
                   context, '/topup-success', (route) => false);
             }
