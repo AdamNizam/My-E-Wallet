@@ -61,7 +61,7 @@ class UserService {
 
       final res = await http.get(
         Uri.parse(
-          '$baseUrl/user/$username',
+          '$baseUrl/users/$username',
         ),
         headers: {
           'Authorization': token,
