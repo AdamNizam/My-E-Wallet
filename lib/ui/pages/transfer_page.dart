@@ -36,7 +36,8 @@ class TransferPage extends StatelessWidget {
             title: 'by username',
             isShowTitle: false,
           ),
-          buildResults(),
+          // buildResults(),
+          buildRecentUsers(),
           const SizedBox(
             height: 30,
           )
