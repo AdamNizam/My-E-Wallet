@@ -102,7 +102,7 @@ class _TransferPageState extends State<TransferPage> {
                         context, "You don't select of user yet!");
                   },
                   style: TextButton.styleFrom(
-                    backgroundColor: redColor,
+                    backgroundColor: blueAcientColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(56),
                     ),

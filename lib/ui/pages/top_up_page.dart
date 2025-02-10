@@ -110,6 +110,11 @@ class _TopUpPageState extends State<TopUpPage> {
                           selectedPaymentMethod = paymentMethods;
                         });
                       },
+                      onDoubleTap: () {
+                        setState(() {
+                          selectedPaymentMethod = null;
+                        });
+                      },
                       child: BanksItem(
                         paymentMethod: paymentMethods,
                         isSelected:
@@ -164,15 +169,15 @@ class _TopUpPageState extends State<TopUpPage> {
                         context, "You don't select of Bank yet!");
                   },
                   style: TextButton.styleFrom(
-                    backgroundColor: whiteColor,
+                    backgroundColor: blueAcientColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(56),
                     ),
                   ),
                   child: Text(
                     'Select Of Bank',
-                    style: blackTextStyle.copyWith(
-                        fontSize: 16, fontWeight: semiBold),
+                    style: whiteTextStyle.copyWith(
+                        fontSize: 16, fontWeight: medium),
                   ),
                 ),
               ),
