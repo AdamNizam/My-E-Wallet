@@ -199,6 +199,17 @@ class _TransferPageState extends State<TransferPage> {
           BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
               if (state is UserSuccess) {
+                if (state.users.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'User tidak ditemukan',
+                      style: blackTextStyle.copyWith(
+                        fontSize: 14,
+                        fontWeight: medium,
+                      ),
+                    ),
+                  );
+                }
                 return Wrap(
                   spacing: 10,
                   runSpacing: 10,
@@ -222,6 +233,7 @@ class _TransferPageState extends State<TransferPage> {
                   }).toList(),
                 );
               }
+
               return Center(
                 child: SizedBox(
                   width: 40,

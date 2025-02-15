@@ -1,11 +1,28 @@
+import 'package:bank_sha/models/data_plan_model.dart';
+import 'package:bank_sha/models/operator_card_model.dart';
+import 'package:bank_sha/shared/shared_methods.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/widgets/buttons.dart';
 import 'package:bank_sha/ui/widgets/forms.dart';
 import 'package:bank_sha/ui/widgets/package_data_item.dart';
 import 'package:flutter/material.dart';
 
-class DataPackagePage extends StatelessWidget {
-  const DataPackagePage({super.key});
+class DataPackagePage extends StatefulWidget {
+  final OperatorCardModel? operatorCard;
+
+  const DataPackagePage({
+    super.key,
+    required this.operatorCard,
+  });
+
+  @override
+  State<DataPackagePage> createState() => _DataPackagePageState();
+}
+
+class _DataPackagePageState extends State<DataPackagePage> {
+  final phoneController = TextEditingController(text: '');
+
+  DataPlanModel? selectedDataPlan;
 
   @override
   Widget build(BuildContext context) {
@@ -14,16 +31,33 @@ class DataPackagePage extends StatelessWidget {
         title: Text('Package Data'),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(24),
-        child: CustomFilledButton(
-          title: 'Continue',
-          onPressed: () async {
-            if (await Navigator.pushNamed(context, '/pin') == true) {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, '/data-success', (route) => false);
-            }
-          },
-        ),
+        padding: EdgeInsets.all(24),
+        child: (selectedDataPlan != null && phoneController.text.isNotEmpty)
+            ? CustomFilledButton(
+                title: 'Continue',
+                onPressed: () {},
+              )
+            : SizedBox(
+                height: 50,
+                width: double.infinity,
+                child: TextButton(
+                  onPressed: () {
+                    showCustomSnackbar(
+                        context, "You don't select of data yet!");
+                  },
+                  style: TextButton.styleFrom(
+                    backgroundColor: blueAcientColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(56),
+                    ),
+                  ),
+                  child: Text(
+                    'Select Of Data',
+                    style: whiteTextStyle.copyWith(
+                        fontSize: 16, fontWeight: medium),
+                  ),
+                ),
+              ),
       ),
       body: ListView(
         padding: const EdgeInsets.symmetric(
@@ -45,6 +79,7 @@ class DataPackagePage extends StatelessWidget {
           ),
           CustomFormField(
             title: '+628',
+            controller: phoneController,
             isShowTitle: false,
           ),
           const SizedBox(
@@ -64,33 +99,24 @@ class DataPackagePage extends StatelessWidget {
             spacing: 18,
             runSpacing: 15,
             alignment: WrapAlignment.center,
-            children: [
-              PackageDataItem(
-                amount: 10,
-                price: 20000,
-                isSelected: true,
-              ),
-              PackageDataItem(
-                amount: 15,
-                price: 32000,
-              ),
-              PackageDataItem(
-                amount: 20,
-                price: 59000,
-              ),
-              PackageDataItem(
-                amount: 40,
-                price: 110000,
-              ),
-              PackageDataItem(
-                amount: 67,
-                price: 230000,
-              ),
-              PackageDataItem(
-                amount: 100,
-                price: 1000000,
-              ),
-            ],
+            children: widget.operatorCard!.dataPlans!.map((dataPlan) {
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    selectedDataPlan = dataPlan;
+                  });
+                },
+                onDoubleTap: () {
+                  setState(() {
+                    selectedDataPlan = null;
+                  });
+                },
+                child: PackageDataItem(
+                  dataPlan: dataPlan,
+                  isSelected: dataPlan.id == selectedDataPlan?.id,
+                ),
+              );
+            }).toList(),
           ),
         ],
       ),
