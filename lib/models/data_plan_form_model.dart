@@ -8,4 +8,12 @@ class DataPlanFormModel {
     this.phoneNumber,
     this.pin,
   });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'data_plan_id': dataPlanId.toString(),
+      'phone_number': phoneNumber,
+      'pin': pin,
+    };
+  }
 }
