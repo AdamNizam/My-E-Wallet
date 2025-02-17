@@ -38,6 +38,7 @@ class TransferRecentUserItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
+                fit: BoxFit.cover,
                 image: user.profilePicture == null
                     ? AssetImage('assets/img_profile.png')
                     : NetworkImage(user.profilePicture!) as ImageProvider,

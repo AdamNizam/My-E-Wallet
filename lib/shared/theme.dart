@@ -16,6 +16,9 @@ Color numberBackgroundColor = const Color(0xff1A1D2E);
 TextStyle blackTextStyle = GoogleFonts.poppins(
   color: blackColor,
 );
+TextStyle redTextStyle = GoogleFonts.poppins(
+  color: redColor,
+);
 
 TextStyle whiteTextStyle = GoogleFonts.poppins(
   color: whiteColor,

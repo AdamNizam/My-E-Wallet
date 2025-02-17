@@ -1,4 +1,6 @@
 import 'package:bank_sha/blocs/auth/auth_bloc.dart';
+import 'package:bank_sha/blocs/transaction/transaction_bloc.dart';
+import 'package:bank_sha/blocs/user/user_bloc.dart';
 import 'package:bank_sha/shared/shared_methods.dart';
 import 'package:bank_sha/shared/theme.dart';
 import 'package:bank_sha/ui/pages/more_dialog.dart';
@@ -376,39 +378,36 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
               color: whiteColor,
             ),
-            child: Column(
-              children: [
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat1.png',
-                  title: 'Top Up',
-                  time: 'Yasterday',
-                  value: '+ ${formatCurrency(25000)}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat2.png',
-                  title: 'Cashback',
-                  time: 'Sept 11, 2023',
-                  value: '+ ${formatCurrency(22000)}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat3.png',
-                  title: 'Withdraw',
-                  time: 'August 02, 2024',
-                  value: '- ${formatCurrency(1000)}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat4.png',
-                  title: 'Transfer',
-                  time: 'June 1, 2020',
-                  value: '- ${formatCurrency(25000)}',
-                ),
-                HomeLatestTransactionItem(
-                  iconUrl: 'assets/ic_transaction_cat5.png',
-                  title: 'Electric',
-                  time: 'February 17, 2025',
-                  value: '- ${formatCurrency(20000)}',
-                ),
-              ],
+            child: BlocProvider(
+              create: (context) => TransactionBloc()..add(TransactionGet()),
+              child: BlocBuilder<TransactionBloc, TransactionState>(
+                builder: (context, state) {
+                  if (state is TransactionFailed) {
+                    showCustomSnackbar(
+                        context, 'History transaction not found');
+                  }
+
+                  if (state is TransactionSuccess) {
+                    return Column(
+                      children: state.transaction.map((transaction) {
+                        return HomeLatestTransactionItem(
+                            transaction: transaction);
+                      }).toList(),
+                    );
+                  }
+                  return Center(
+                    child: SizedBox(
+                      width: 40,
+                      height: 40,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 3.0,
+                        backgroundColor: Colors.grey[300],
+                        valueColor: AlwaysStoppedAnimation<Color>(blueColor),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           )
         ],
@@ -432,28 +431,34 @@ class HomePage extends StatelessWidget {
           SizedBox(
             height: 14,
           ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: const [
-                HomeUserItem(
-                  imgurl: 'assets/img_friend1.png',
-                  username: 'Bella',
+          BlocProvider(
+            create: (context) => UserBloc()..add(UserGetRecent()),
+            child: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+              if (state is UserFailed) {
+                showCustomSnackbar(context, 'Not Found');
+              }
+              if (state is UserSuccess) {
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: state.users.map((users) {
+                      return HomeUserItem(user: users);
+                    }).toList(),
+                  ),
+                );
+              }
+              return Center(
+                child: SizedBox(
+                  width: 40,
+                  height: 40,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 3.0,
+                    backgroundColor: Colors.grey[300],
+                    valueColor: AlwaysStoppedAnimation<Color>(blueColor),
+                  ),
                 ),
-                HomeUserItem(
-                  imgurl: 'assets/img_friend2.png',
-                  username: 'Jennie',
-                ),
-                HomeUserItem(
-                  imgurl: 'assets/img_friend3.png',
-                  username: 'smith',
-                ),
-                HomeUserItem(
-                  imgurl: 'assets/img_friend4.png',
-                  username: 'Alonso',
-                ),
-              ],
-            ),
+              );
+            }),
           ),
         ],
       ),
